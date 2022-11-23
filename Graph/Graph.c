@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<stdbool.h>
 #define MaxInt 32767
 typedef int ArcType;
 typedef char VerTexType;
@@ -63,10 +64,22 @@ void CreateUDN(AMGraph G){
 		printf("\n");
 	}
 }
+void DFS(AMGraph G,int v,bool *visited){
+	visited[v]=true;
+	for(int w=0;w<G->vexnum;w++){
+		if((G->arranges[v][w]!=0)&&(!visited[w]))DFS(G,w,visited);
+	}
+}
 
 int main(){
 	AMGraph G = UDNInit();
 	CreateUDN(G);
+	bool *visited = (bool*)malloc(sizeof(G->topnum));
+	DFS(G,0,visited);
+	for(int i=0;i<G->topnum;i++){
+		printf("%2d",visited[i]);
+	}
+	printf("\n");
 	return 0;
 }
 
