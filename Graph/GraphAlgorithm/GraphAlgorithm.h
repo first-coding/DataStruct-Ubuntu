@@ -80,11 +80,12 @@ void Kruskal(AMGraph G){
 
 int Min(AMGraph G,PrimEdge *arrays){
 	int j=0;
-	VerTexType middle = arrays[1].wight;
-	for(int i=2;i<G->topnum;i++){
+	ArcType middle = arrays[0].wight;
+	for(int i=1;i<G->topnum;i++){
+		//printf("%2d,%2d\n",middle,arrays[i].wight);
 		if(middle>arrays[i].wight){
 			middle = arrays[i].wight;
-			j = i;
+			j=i;
 		}
 	}
 	return j;
@@ -96,18 +97,23 @@ void Prim(AMGraph G,VerTexType u){
 	for(int j=0;j<G->topnum;j++){
 		if(j!=k) arrays[j]=(PrimEdge){u,G->arranges[k][j]};
 	}
-	arrays[k].wight = 0;
+	arrays[k].wight = MaxInt;
+	int total = 0;
 	for(int i=1;i<G->topnum;i++){
+		int last = k;
 		k = Min(G,arrays);
+		printf("%d",k);
 		VerTexType u0 = arrays[k].adjvex;
 		VerTexType v0 = G->points[k];
 		printf("%2c-%2c\n",u0,v0);
-		arrays[k].wight=0;
+		total = arrays[k].wight+total;
+		arrays[k].wight=MaxInt;
 		for(int j=0;j<G->topnum;j++){
-			if(G->arranges[k][j]<arrays[j].wight){
+			if(G->arranges[k][j]<arrays[j].wight && j!=last){
 				arrays[j] = (PrimEdge){G->points[k],G->arranges[k][j]};
 			}
 		}
 	}
+	printf("total=%d",total);
 }
 
