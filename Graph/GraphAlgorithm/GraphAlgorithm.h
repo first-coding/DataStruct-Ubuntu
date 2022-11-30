@@ -1,4 +1,3 @@
-#include"../array of Graph/Graph.h"
 typedef struct edge{
 	VerTexType Head;
 	VerTexType Tail;
@@ -9,16 +8,6 @@ typedef struct primedge{
 	VerTexType adjvex;
 	ArcType wight;
 }PrimEdge;
-
-int LocateVex(AMGraph G,VerTexType topnum){
-	int i;
-	for(i=0;i<G->topnum;i++){
-		if(G->points[i]==topnum){
-			break;
-		}
-	}
-	return i;
-}
 
 void sort(Edge *arrays,AMGraph G){
 	for(int i=0;i<G->vexnum;i++){

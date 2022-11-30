@@ -28,6 +28,15 @@ int LocateTop(AMGraph G,char** topnum){
       return i;
 }
 
+int LocateVex(AMGraph G,VerTexType topnum){
+        int i;
+        for(i=0;i<G->topnum;i++){
+                if(G->points[i]==topnum){
+                        break;
+                }
+        }
+        return i;
+}
 
 void CreateUDN(AMGraph G){
 	printf("please input Vexnum and topnum:\n");
@@ -64,6 +73,7 @@ void CreateUDN(AMGraph G){
 		printf("\n");
 	}
 }
+
 void DFS(AMGraph G,int v,bool *visited){
 	visited[v]=true;
 	for(int w=0;w<G->vexnum;w++){
